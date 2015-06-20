@@ -2,7 +2,7 @@
 #
 # Escape time of a random walker from a cylinder with reflecting
 # boundaries on the left and open boundaries on the right
-# Habib Rehmann + pruess
+# Habib Rehmann and Gunnar Pruessner
 #
 # $Header: /home/ma/p/pruess/.cvsroot/misc/randomwalkv5.py,v 1.1 2015/06/19 13:30:11 pruess Exp $
 #
