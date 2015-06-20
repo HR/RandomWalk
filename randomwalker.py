@@ -3,7 +3,7 @@
 # Escape time of a random walker from a cylinder with reflecting
 # boundaries on the left and open boundaries on the right. 
 # PNG output of a single trajectory.
-# Habib Rehmann and Gunnar Pruessner
+# Habib Rehmann + pruess
 #
 # $Header: /home/ma/p/pruess/.cvsroot/misc/randomwalkv4.py,v 1.1 2015/06/19 13:30:11 pruess Exp $
 #
@@ -29,6 +29,7 @@ yList = []   # List of the y coordinates of all points visited.
 random.seed(seed) # set random seed
 
 while True:
+  s += 1
   if (bool(random.getrandbits(1))):
     if (bool(random.getrandbits(1))):
       x+=1
@@ -43,13 +44,12 @@ while True:
   if (x>=Length):
     break;
   if (x<0): 
-    x=-x
+    x=0
   if (y>=Circ):
     y-=Circ
   if (y<0):
     y+=Circ
 
-  s += 1
   xList.append(x)
   yList.append(y)
 

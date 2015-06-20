@@ -13,10 +13,9 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 seed = 7
-N = 1   # Stepsize
-Length = 20 # length of the cyclinder
+Length = 10 # length of the cyclinder
 Circ = 20 # circumference of cyclinder
-Iterations = 10000
+Iterations = 20000
 
 
 
@@ -46,16 +45,16 @@ for it in range(1, Iterations+1):
       else:
 	y-=1
 
+    s += 1
     if (x>=Length):
       break;
     if (x<0): 
-      x=-x
+      x=0
     if (y>=Circ):
       y-=Circ
     if (y<0):
       y+=Circ
 
-    s += 1
   m0+=1
   m1+=s
 
