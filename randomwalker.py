@@ -25,36 +25,60 @@ x = xStart   # x coordinate of point.
 y = yStart   # y coordinate of point.
 xList = []   # List of the x coordinates of all points visited.
 yList = []   # List of the y coordinates of all points visited.
+lattice = np.zeros((Circ, Length), dtype=int) # (Length x Circ) 2 dimensional array prepopulated by zeros
 
 random.seed(seed) # set random seed
 
+
+# Generate a randomwalk
 while True:
-  s += 1
-  if (bool(random.getrandbits(1))):
-    if (bool(random.getrandbits(1))):
-      x+=1
-    else:
-      x-=1
-  else:
-    if (bool(random.getrandbits(1))):
-      y+=1
-    else:
-      y-=1
+	s += 1
+	if (bool(random.getrandbits(1))):
+		if (bool(random.getrandbits(1))):
+			x+=1
+		else:
+			x-=1
+	else:
+		if (bool(random.getrandbits(1))):
+			y+=1
+		else:
+			y-=1
 
-  if (x>=Length):
-    break;
-  if (x<0): 
-    x=0
-  if (y>=Circ):
-    y-=Circ
-  if (y<0):
-    y+=Circ
+	if (x>=Length):
+		break;
+	if (x<0): 
+		x=0
+	if (y>=Circ):
+		y-=Circ
+	if (y<0):
+		y+=Circ
 
-  xList.append(x)
-  yList.append(y)
+	lattice[y][x] += 1
+	xList.append(x)
+	yList.append(y)
 
-# from
-# http://stackoverflow.com/questions/16057869/setting-the-size-of-the-plotting-canvas-in-matplotlib
+x0 = -1
+y0 = -1
+c = 0
+
+# Erase loops
+for y in yList:
+	for x in xList:
+		if lattice[y][x] > 1 and (x0 == -1):
+			x0 = x
+			y0 = y
+		elif (x == x0) and (y == y0):
+			# erase loops
+			del xList[xList.index(x0):xList.index(x0+c)]
+			del yList[yList.index(y0):yList.index(y0+c)]
+			x0, y0 = -1, -1
+			c = 0
+		else:
+			c += 1
+			lattice[y][x] -= 1
+
+# Plot random walk
+# from http://stackoverflow.com/questions/16057869/setting-the-size-of-the-plotting-canvas-in-matplotlib
 # and Habib suggesting using set_size_inches
 dpi=72.
 xinch = Length / dpi
