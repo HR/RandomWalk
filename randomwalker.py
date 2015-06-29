@@ -62,19 +62,19 @@ y0 = -1
 c = 0
 pos = 0
 
-print(len(xList))
+print("Initially; xList length:{}, xList length:{}".format(len(xList), len(yList)))
 
 # Erase loops
 for y in yList:
     x = xList[pos]
     # print(lattice[4][8],x,x0,y,y0)
     # if lattice[y][x] > 1:
-    # print("({}, {}) visited {} times".format(x, y, lattice[y][x]))
+    #     print("({}, {}) visited {} times".format(x, y, lattice[y][x]))
     if lattice[y][x] > 1 and (x0 == -1):
         x0 = x
         y0 = y
         pos0 = pos
-        print("{}, {} coordinate at pos {}, {}".format(
+        print("Initially; {}, {} coordinate at pos {}, {}".format(
             x, y, pos, lattice[y][x]))
     elif (x == x0) and (y == y0) and (lattice[y][x] == 1):
         # erase loop
@@ -85,9 +85,9 @@ for y in yList:
             print("x: {}, y: {}, c: {}  >> ValueError".format(x, y, c))
         x0, y0 = -1, -1
         pos -= (c + 1)
-        print(pos, c, x, y)
+        print("After del; xList length:{}, xList length:{}".format(len(xList), len(yList)))
         c = 0
-        print(len(xList))
+        # print(len(xList))
     else:
         c += 1
     lattice[y][x] -= 1
