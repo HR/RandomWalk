@@ -1,35 +1,27 @@
 #!/usr/bin/python
 #
-# Escape time of a random walker from a cylinder with reflecting
-# boundaries on the left and open boundaries on the right.
+# An implementation of a Loop Erased Random Walk (LERW)
+# from a cylinder with reflecting boundaries on the left
+# and open boundaries on the right.
 # PNG output of a single trajectory.
 # Habib Rehmann and Gunnar Pruessner
 #
-# $Header: /home/ma/p/pruess/.cvsroot/misc/randomwalker_tuples.py,v 1.2 2015/06/30 10:25:47 pruess Exp $
-#
-
 
 import random
 from numpy import cos, sin, radians
 import numpy as np
 import matplotlib.pyplot as plt
 
-seed = 10
-N = 1   # Stepsize
+seed = 10 # random seed
 Length = 200  # length of the cyclinder
 Circ = 200  # circumference of cyclinder
-xStart = 0   # x coordinate of starting location. Origin is at centre of square
-yStart = Circ / 2
-
+x = 0   # x coordinate of starting location
+y = Circ / 2 # y coordinate of starting location. Origin is at centre of square
 s = 0  # Step number.
-x = xStart   # x coordinate of point.
-y = yStart   # y coordinate of point.
+
 trajectory = []   # List of the x coordinates of all points visited.
-# (Length x Circ) 2 dimensional array prepopulated by zeros
-lattice = np.zeros((Length, Circ), dtype=int)
-
-random.seed(seed)  # set random seed
-
+lattice = np.zeros((Length, Circ), dtype=int) # (Length x Circ) 2D array of zeros
+random.seed(seed)
 
 # Generate a randomwalk
 while True:
@@ -59,7 +51,6 @@ while True:
 
 x0 = None
 y0 = None
-c = 0
 pos = 0
 
 # Loop erasure
