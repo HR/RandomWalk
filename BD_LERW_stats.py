@@ -61,8 +61,6 @@ while True:
     lattice[x][y] += 1
     trajectory.append((x, y))
 
-plt.plot(*zip(*trajectory), color='r', linewidth=0.3)
-
 x0 = None
 y0 = None
 pos = 0
@@ -106,5 +104,5 @@ while pos < len(lerw):
 
 plt.plot(*zip(*lerw), color='g', linewidth=0.3)
 
-# Plot random walk
+# Output PNG for RW
 plt.savefig("BD_LERW.png", bbox_inches="tight", dpi=dpi)
