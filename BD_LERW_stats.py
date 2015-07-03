@@ -103,5 +103,5 @@ while pos < len(lerw):
 
 plt.plot(*zip(*lerw), color='g', linewidth=0.3)
 
-# Output PNG for RW
-plt.savefig("BD_LERW.png", bbox_inches="tight", dpi=dpi)
+# Plot random walk
+plt.savefig( __file__[:-3]+".png", bbox_inches="tight", dpi=dpi)

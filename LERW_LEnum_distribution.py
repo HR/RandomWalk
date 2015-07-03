@@ -90,4 +90,4 @@ plt.title(r'$\mathrm{Histogram\ of\ normalized\ LERW:}\ $')
 plt.grid(True)
 
 
-plt.savefig("LEnum_distr_histogram.png", bbox_inches="tight")
+plt.savefig(__file__[:-3]+"_histogram.png", bbox_inches="tight")
