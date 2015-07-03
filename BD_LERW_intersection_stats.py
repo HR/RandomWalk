@@ -34,6 +34,7 @@ ax.set_ylim(0, Circ - 1)
 ax.get_xaxis().set_visible(False)
 ax.get_yaxis().set_visible(False)
 
+
 # Generate a randomwalk
 while True:
     s += 1
@@ -62,48 +63,53 @@ while True:
 
 plt.plot(*zip(*trajectory), color='r', linewidth=0.3)
 
-x0 = None
-y0 = None
-pos = 0
-lerw = deepcopy(trajectory)
-lcpy = deepcopy(lattice)
+
 # Loop erasure (tranversal from left to right)
-while pos < len(lerw):
-    x, y = lerw[pos]
-    if lcpy[x][y] > 1 and (not x0):
-        x0, y0 = x, y
-        pos0 = pos
-        # print("First repeated element ", pos0, x0, y0)
-    elif (x == x0) and (y == y0) and (lcpy[x][y] == 1):
-        # print("Deleting from ", pos0, " to ", pos)
-        del lerw[pos0:pos]
-        # print 'Loop 1 delete from ', pos0, ' to ', pos
-        x0, y0 = None, None
-        pos = pos0
-    lcpy[x][y] -= 1
-    pos += 1
-
-plt.plot(*zip(*lerw), color='b', linewidth=0.3)
-
-lerw = deepcopy(trajectory[::-1])
+lerwlr = deepcopy(trajectory)
 lcpy = deepcopy(lattice)
-x0 = None
-y0 = None
+x0, y0 = None, None
 pos = 0
-while pos < len(lerw):
-    x, y = lerw[pos]
+
+while pos < len(lerwlr):
+    x, y = lerwlr[pos]
     if lcpy[x][y] > 1 and (not x0):
         x0, y0 = x, y
         pos0 = pos
     elif (x == x0) and (y == y0) and (lcpy[x][y] == 1):
-        # print("Deleting from ", pos0, " to ", pos)
-        del lerw[pos0:pos]
+        del lerwlr[pos0:pos]
         x0, y0 = None, None
         pos = pos0
     lcpy[x][y] -= 1
     pos += 1
 
-plt.plot(*zip(*lerw), color='g', linewidth=0.3)
+plt.plot(*zip(*lerwlr), color='b', linewidth=0.3)
+
+
+# Loop erasure (tranversal from right to left)
+lerwrl = deepcopy(trajectory[::-1])
+lcpy = deepcopy(lattice)
+x0, y0 = None, None
+pos = 0
+
+while pos < len(lerwrl):
+    x, y = lerwrl[pos]
+    if lcpy[x][y] > 1 and (not x0):
+        x0, y0 = x, y
+        pos0 = pos
+    elif (x == x0) and (y == y0) and (lcpy[x][y] == 1):
+        del lerwrl[pos0:pos]
+        x0, y0 = None, None
+        pos = pos0
+    lcpy[x][y] -= 1
+    pos += 1
+
+plt.plot(*zip(*lerwrl), color='g', linewidth=0.3)
+
+
+# intersection
+intersect = list(set(lerwlr).intersection(lerwrl))
+print intersect
+
 
 # Plot random walk
 plt.savefig(__file__[:-3]+".png", bbox_inches="tight", dpi=dpi)
