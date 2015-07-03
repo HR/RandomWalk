@@ -97,27 +97,16 @@ while pos < len(lerwrl):
 # plt.plot(*zip(*lerwrl), color='g', linewidth=0.3)
 
 
-# Distribution of the horizontal displacement of the intersections
-intr = list(set(lerwlr).intersection(lerwrl))
-print len(intr), len(lerwrl), len(lerwlr)
-x = np.array([x[0] for x in intr])
-n, bins, patches = plt.hist(x, 70, normed=1, facecolor='green', alpha=0.75)
+# Determine the enclosed area between the bidirectional random walks
+areas = []
 
-plt.xlabel('Horizontal displacement')
-plt.ylabel('Frequency')
-plt.title(r'$\mathrm{Distribution\ of\ the\ horizontal\ displacement\ of\ the\ intersections:}\ $')
-plt.grid(True)
+for i in range(Circ):
+    for x in lerwlr: 
+        if x[1] == i:
 
-plt.savefig(__file__[:-3]+"_(horiz_dis).png", bbox_inches="tight")
+print areas
 
-# Distribution of the vertical displacement of the intersections
-x = np.array([x[1] for x in intr])
-n, bins, patches = plt.hist(x, 70, normed=1, facecolor='green', alpha=0.75)
 
-plt.xlabel('Vertical displacement')
-plt.ylabel('Frequency')
-plt.title(r'$\mathrm{Distribution\ of\ the\ vertical\ displacement\ of\ the\ intersections:}\ $')
-plt.grid(True)
 
 # Plot random walk
-plt.savefig(__file__[:-3]+"_(verti_dis).png", bbox_inches="tight")
+# plt.savefig(__file__[:-3]+"_(verti_dis).png", bbox_inches="tight")

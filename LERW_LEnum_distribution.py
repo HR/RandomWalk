@@ -20,7 +20,7 @@ x = 0   # x coordinate of starting location
 # y coordinate of starting location. Origin is at centre of square
 y = Circ / 2
 s = 0  # Step number.
-nLE = []  # number of loops erased for coordinate
+nLE = []  # size of loops erased for coordinate
 
 trajectory = []   # List of the x coordinates of all points visited.
 # (Length x Circ) 2D array of zeros
@@ -73,8 +73,8 @@ while pos < len(trajectory):
 
 nLE = np.array(nLE)
 
-# Distribution of number of loops erased with repect to displacement histogram
-# nLE = x: number of loops erased for coordinate
+# Distribution of size of loops erased with repect to displacement histogram
+# nLE = x: size of loops erased for coordinate
 
 # Normalized distribution
 # mu, sigma = np.mean(nLE), np.std(nLE)
@@ -84,7 +84,7 @@ x = nLE
 # the histogram of the data
 n, bins, patches = plt.hist(x, 70, normed=1, facecolor='green', alpha=0.75)
 
-plt.xlabel('Number of loops erased for coordinate')
+plt.xlabel('Size of loops erased for coordinate')
 plt.ylabel('Frequency')
 plt.title(r'$\mathrm{Histogram\ of\ normalized\ LERW:}\ $')
 plt.grid(True)
