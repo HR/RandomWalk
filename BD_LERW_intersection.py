@@ -3,7 +3,8 @@
 # An implementation of a Bidirectional Loop Erased Random Walk (LERW)
 # from a cylinder with reflecting boundaries on the left
 # and open boundaries on the right.
-# PNG output of a single trajectory.
+# PNG output of a single trajectory
+# Distribution of the displacement of the intersections
 # Habib Rehmann and Gunnar Pruessner
 #
 
@@ -24,16 +25,6 @@ trajectory = []   # List of the x coordinates of all points visited.
 # (Length x Circ) 2D array of zeros
 lattice = np.zeros((Length, Circ), dtype=int)
 random.seed(seed)
-
-# Plot config
-dpi = 300
-fig, ax = plt.subplots()
-fig.set_size_inches(3, Circ * 3. / Length)
-ax.set_xlim(0, Length - 1)
-ax.set_ylim(0, Circ - 1)
-ax.get_xaxis().set_visible(False)
-ax.get_yaxis().set_visible(False)
-
 
 # Generate a randomwalk
 while True:
@@ -61,7 +52,7 @@ while True:
     lattice[x][y] += 1
     trajectory.append((x, y))
 
-plt.plot(*zip(*trajectory), color='r', linewidth=0.3)
+# plt.plot(*zip(*trajectory), color='r', linewidth=0.3)
 
 
 # Loop erasure (tranversal from left to right)
@@ -82,7 +73,7 @@ while pos < len(lerwlr):
     lcpy[x][y] -= 1
     pos += 1
 
-plt.plot(*zip(*lerwlr), color='b', linewidth=0.3)
+# plt.plot(*zip(*lerwlr), color='b', linewidth=0.3)
 
 
 # Loop erasure (tranversal from right to left)
@@ -103,13 +94,29 @@ while pos < len(lerwrl):
     lcpy[x][y] -= 1
     pos += 1
 
-plt.plot(*zip(*lerwrl), color='g', linewidth=0.3)
+# plt.plot(*zip(*lerwrl), color='g', linewidth=0.3)
 
 
-# intersection
-intersect = list(set(lerwlr).intersection(lerwrl))
-print intersect
+# Distribution of the horizontal displacement of the intersections
+intr = list(set(lerwlr).intersection(lerwrl))
+x = np.array([x[0] for x in intr])
+n, bins, patches = plt.hist(x, 70, normed=1, facecolor='green', alpha=0.75)
 
+plt.xlabel('Horizontal displacement')
+plt.ylabel('Frequency')
+plt.title(r'$\mathrm{Distribution\ of\ the\ horizontal\ displacement\ of\ the\ intersections:}\ $')
+plt.grid(True)
+
+plt.savefig(__file__[:-3]+"_(horiz_dis).png", bbox_inches="tight")
+
+# Distribution of the vertical displacement of the intersections
+x = np.array([x[1] for x in intr])
+n, bins, patches = plt.hist(x, 70, normed=1, facecolor='green', alpha=0.75)
+
+plt.xlabel('Vertical displacement')
+plt.ylabel('Frequency')
+plt.title(r'$\mathrm{Distribution\ of\ the\ vertical\ displacement\ of\ the\ intersections:}\ $')
+plt.grid(True)
 
 # Plot random walk
-plt.savefig(__file__[:-3]+".png", bbox_inches="tight", dpi=dpi)
+plt.savefig(__file__[:-3]+"_(verti_dis).png", bbox_inches="tight")
