@@ -18,7 +18,9 @@ LERW_LeftRight = randomwalk.trajectories_leftright
 LERW_RightLeft = randomwalk.trajectories_rightleft
 
 for i in range(len(LERW_RightLeft)):
-    intr.append(set(LERW_LeftRight[i]).intersection(LERW_RightLeft[i]))
+    intersection = set(LERW_LeftRight[i]).intersection(LERW_RightLeft[i])
+    if intersection:
+        intr.append(intersection)
 
 
 
