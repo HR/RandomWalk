@@ -18,7 +18,7 @@ LERW_LeftRight = randomwalk.trajectories_leftright
 LERW_RightLeft = randomwalk.trajectories_rightleft
 # plt.plot(*zip(*lerwrl), color='g', linewidth=0.3)
 for i in range(len(LERW_RightLeft)):
-    intr.append(list(set(LERW_LeftRight[i]).intersection(LERW_RightLeft[i])))
+	intr.append(list(set(LERW_LeftRight[i]).intersection(LERW_RightLeft[i])))
 
 
 

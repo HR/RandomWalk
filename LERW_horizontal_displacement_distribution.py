@@ -20,14 +20,14 @@ ELsizes = randomwalk.ErasedLoopSizes
 x = list(itertools.chain(*ELsizes))
 
 # for s in list(itertools.chain(*ELsizes)):
-#     print s
+#	 print s
 
 
 # ELsizes = list(map(list, zip(*ELsizes)))
 # x = []
 
 # for i in range(len(ELsizes)):
-#     x.append(np.mean(ELsizes[i]))
+#	 x.append(np.mean(ELsizes[i]))
 x = np.array(x)
 # Distribution of size of loops erased with repect to displacement histogram
 

@@ -36,29 +36,29 @@ ax.get_yaxis().set_visible(False)
 
 # Generate a randomwalk
 while True:
-    s += 1
-    if (bool(random.getrandbits(1))):
-        if (bool(random.getrandbits(1))):
-            x += 1
-        else:
-            x -= 1
-    else:
-        if (bool(random.getrandbits(1))):
-            y += 1
-        else:
-            y -= 1
+	s += 1
+	if (bool(random.getrandbits(1))):
+		if (bool(random.getrandbits(1))):
+			x += 1
+		else:
+			x -= 1
+	else:
+		if (bool(random.getrandbits(1))):
+			y += 1
+		else:
+			y -= 1
 
-    if (x >= Length):
-        break
-    elif (x < 0):
-        x = 0
-    if (y >= Circ):
-        y -= Circ
-    elif (y < 0):
-        y += Circ
+	if (x >= Length):
+		break
+	elif (x < 0):
+		x = 0
+	if (y >= Circ):
+		y -= Circ
+	elif (y < 0):
+		y += Circ
 
-    lattice[x][y] += 1
-    trajectory.append((x, y))
+	lattice[x][y] += 1
+	trajectory.append((x, y))
 
 # Loop erasure (tranversal from left to right)
 lerw = deepcopy(trajectory)
@@ -67,16 +67,16 @@ x0, y0 = None, None
 pos = 0
 
 while pos < len(lerw):
-    x, y = lerw[pos]
-    if lcpy[x][y] > 1 and (not x0):
-        x0, y0 = x, y
-        pos0 = pos
-    elif (x == x0) and (y == y0) and (lcpy[x][y] == 1):
-        del lerw[pos0:pos]
-        x0, y0 = None, None
-        pos = pos0
-    lcpy[x][y] -= 1
-    pos += 1
+	x, y = lerw[pos]
+	if lcpy[x][y] > 1 and (not x0):
+		x0, y0 = x, y
+		pos0 = pos
+	elif (x == x0) and (y == y0) and (lcpy[x][y] == 1):
+		del lerw[pos0:pos]
+		x0, y0 = None, None
+		pos = pos0
+	lcpy[x][y] -= 1
+	pos += 1
 
 plt.plot(*zip(*lerw), color='b', linewidth=0.3)
 
@@ -88,16 +88,16 @@ x0, y0 = None, None
 pos = 0
 
 while pos < len(lerw):
-    x, y = lerw[pos]
-    if lcpy[x][y] > 1 and (not x0):
-        x0, y0 = x, y
-        pos0 = pos
-    elif (x == x0) and (y == y0) and (lcpy[x][y] == 1):
-        del lerw[pos0:pos]
-        x0, y0 = None, None
-        pos = pos0
-    lcpy[x][y] -= 1
-    pos += 1
+	x, y = lerw[pos]
+	if lcpy[x][y] > 1 and (not x0):
+		x0, y0 = x, y
+		pos0 = pos
+	elif (x == x0) and (y == y0) and (lcpy[x][y] == 1):
+		del lerw[pos0:pos]
+		x0, y0 = None, None
+		pos = pos0
+	lcpy[x][y] -= 1
+	pos += 1
 
 plt.plot(*zip(*lerw), color='g', linewidth=0.3)
 
