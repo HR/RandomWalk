@@ -109,4 +109,4 @@ print areas
 
 
 # Plot random walk
-# plt.savefig(__file__[:-3]+"_(verti_dis).png", bbox_inches="tight")
+# plt.savefig("plots/"+__file__[:-3]+"_(verti_dis).png", bbox_inches="tight")

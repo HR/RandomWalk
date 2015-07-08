@@ -173,7 +173,6 @@ class LERW:
 			x, y = xStart, yStart
 			lattice = np.zeros((self.Length, self.Circ), dtype=int)
 			trajectory = []
-
 			# Generate a randomwalk
 			while True:
 				s += 1
@@ -189,14 +188,14 @@ class LERW:
 						y -= 1
 
 				# Periodic boundaries
-				if (x >= Length):
-					x -= Length
+				if (x >= self.Length):
+					x -= self.Length
 				elif (x < 0):
-					x += Length
-				if (y >= Circ):
-					y -= Circ
+					x += self.Length
+				if (y >= self.Circ):
+					y -= self.Circ
 				elif (y < 0):
-					y += Circ
+					y += self.Circ
 
 				if (x == xStart and y == yStart):
 					break
@@ -204,26 +203,7 @@ class LERW:
 				lattice[x][y] += 1
 				trajectory.append((x, y))
 
-			x0 = None
-			y0 = None
-			pos = 0
-
-			# Loop erasure
-			while pos < len(trajectory):
-				x, y = trajectory[pos]
-				if lattice[x][y] > 1 and (not x0):
-					x0, y0 = x, y
-					pos0 = pos
-					# print("First repeated element ", pos0, x0, y0)
-				elif (x == x0) and (y == y0) and (lattice[x][y] == 1):
-					# print("Deleting from ", pos0, " to ", pos)
-					del trajectory[pos0:pos]
-					x0, y0 = None, None
-					pos = pos0
-				lattice[x][y] -= 1
-				pos += 1
-
-			self.trajectories.append(trajectory)
+			self.trajectories.append(len(trajectory))
 
 	@property
 	def trajectories(self):

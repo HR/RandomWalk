@@ -102,4 +102,4 @@ while pos < len(lerw):
 plt.plot(*zip(*lerw), color='g', linewidth=0.3)
 
 # Plot random walk
-plt.savefig( __file__[:-3]+".png", bbox_inches="tight", dpi=dpi)
+plt.savefig( "plots/"+__file__[:-3]+".png", bbox_inches="tight", dpi=dpi)

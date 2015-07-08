@@ -15,7 +15,7 @@ import itertools
 
 
 randomwalk = LERW()
-randomwalk.gen_fromCoord(realizations=1, Length=200, Circ=200)
+randomwalk.gen_fromCoord(realizations=50, Length=200, Circ=200)
 trajectories = randomwalk.trajectories
 x = list(itertools.chain(*ELsizes))
 x = np.array(x)
@@ -29,16 +29,8 @@ plt.xlabel('Size of loops erased for coordinate')
 plt.ylabel('Frequency')
 plt.yscale('log', nonposy='clip')
 plt.xscale('log', nonposy='clip')
-# plt.yscale('log')
-# plt.xscale('log')
 # plt.loglog(x, basex=2)
 plt.title(r'$\mathrm{Histogram\ of\ the\ horizontal\ displacement\ distribution:}\ $')
 plt.grid(True)
 
-plt.savefig(__file__[:-3]+"_histogram.png", bbox_inches="tight")
-
-# x = [ pow(10,i) for i in x]
-# plt.title(r'$\mathrm{Double\ logarithmic\ (scales)\ plot\ for\ distribution:}\ $')
-# plt.grid(True)
-# plt.loglog(x, pow(x, 10) , basex=2)
-# plt.savefig(__file__[:-3]+"_loglog.png", bbox_inches="tight", dpi=200)
+plt.savefig("plots/"+__file__[:-3]+"_histogram.png", bbox_inches="tight")

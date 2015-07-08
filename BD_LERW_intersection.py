@@ -13,7 +13,7 @@ from LERW import LERW
 
 intr = []
 randomwalk = LERW()
-randomwalk.gen_bidirectional(realizations=100, Length=200, Circ=200)
+randomwalk.gen_bidirectional(realizations=5, Length=200, Circ=200)
 LERW_LeftRight = randomwalk.trajectories_leftright
 LERW_RightLeft = randomwalk.trajectories_rightleft
 # plt.plot(*zip(*lerwrl), color='g', linewidth=0.3)
@@ -31,7 +31,7 @@ plt.ylabel('Frequency')
 plt.title(r'$\mathrm{Distribution\ of\ the\ horizontal\ displacement\ of\ the\ intersections:}\ $')
 plt.grid(True)
 
-plt.savefig(__file__[:-3]+"_(horiz_dis).png", bbox_inches="tight")
+plt.savefig("plots/"+"plots/"+__file__[:-3]+"_(horiz_dis).png", bbox_inches="tight")
 
 # Distribution of the vertical displacement of the intersections
 
@@ -43,4 +43,4 @@ plt.savefig(__file__[:-3]+"_(horiz_dis).png", bbox_inches="tight")
 # plt.grid(True)
 #
 # # Plot random walk
-# plt.savefig(__file__[:-3]+"_(verti_dis).png", bbox_inches="tight")
+# plt.savefig("plots/"+__file__[:-3]+"_(verti_dis).png", bbox_inches="tight")

@@ -44,10 +44,10 @@ plt.xscale('log', nonposy='clip')
 plt.title(r'$\mathrm{Histogram\ of\ the\ horizontal\ displacement\ distribution:}\ $')
 plt.grid(True)
 
-plt.savefig(__file__[:-3]+"_histogram.png", bbox_inches="tight")
+plt.savefig("plots/"+__file__[:-3]+"_histogram.png", bbox_inches="tight")
 
 # x = [ pow(10,i) for i in x]
 # plt.title(r'$\mathrm{Double\ logarithmic\ (scales)\ plot\ for\ distribution:}\ $')
 # plt.grid(True)
 # plt.loglog(x, pow(x, 10) , basex=2)
-# plt.savefig(__file__[:-3]+"_loglog.png", bbox_inches="tight", dpi=200)
+# plt.savefig("plots/"+__file__[:-3]+"_loglog.png", bbox_inches="tight", dpi=200)
