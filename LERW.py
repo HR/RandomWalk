@@ -17,12 +17,12 @@ class LERW:
 		self.seed = kwargs.get('seed', 10) # random seed
 		self.trajectories = [] # List of the coordinates of all points visited.
 		self.ErasedLoopSizes = [] # List of the sizes of the erased loops
-		random.seed(self.seed)
 
 	def generate(self, **kwargs):
 		self.Length = kwargs.get('Length', 200) # length of the cyclinder
 		self.Circ = kwargs.get('Circ', 200) # circumference of cyclinder
 		self.realizations = kwargs.get('realizations', 1) # length of the cyclinder
+		random.seed(self.seed)
 
 		for i in range(self.realizations):
 			s = 0
@@ -82,6 +82,7 @@ class LERW:
 		self.realizations = kwargs.get('realizations', 1) # length of the cyclinder
 		self.trajectories_leftright = []
 		self.trajectories_rightleft = []
+		random.seed(self.seed)
 
 		for i in range(self.realizations):
 			s = 0
@@ -157,6 +158,72 @@ class LERW:
 
 			self.trajectories_leftright.append(LERW_LeftRight)
 			self.trajectories_rightleft.append(LERW_RightLeft)
+
+	def gen_fromCoord(self, **kwargs):
+		self.Length = kwargs.get('Length', 200) # length of the cyclinder
+		self.Circ = kwargs.get('Circ', 200) # circumference of cyclinder
+		self.realizations = kwargs.get('realizations', 1) # length of the cyclinder
+		random.seed(self.seed)
+		xStart = kwargs.get('xStart', random.randint(0, self.Length))
+		yStart = kwargs.get('yStart', random.randint(0, self.Length))
+		x, y = xStart, yStart
+
+		for i in range(self.realizations):
+			s = 0
+			x, y = xStart, yStart
+			lattice = np.zeros((self.Length, self.Circ), dtype=int)
+			trajectory = []
+
+			# Generate a randomwalk
+			while True:
+				s += 1
+				if (bool(random.getrandbits(1))):
+					if (bool(random.getrandbits(1))):
+						x += 1
+					else:
+						x -= 1
+				else:
+					if (bool(random.getrandbits(1))):
+						y += 1
+					else:
+						y -= 1
+
+				# Periodic boundaries
+				if (x >= Length):
+					x -= Length
+				elif (x < 0):
+					x += Length
+				if (y >= Circ):
+					y -= Circ
+				elif (y < 0):
+					y += Circ
+
+				if (x == xStart and y == yStart):
+					break
+
+				lattice[x][y] += 1
+				trajectory.append((x, y))
+
+			x0 = None
+			y0 = None
+			pos = 0
+
+			# Loop erasure
+			while pos < len(trajectory):
+				x, y = trajectory[pos]
+				if lattice[x][y] > 1 and (not x0):
+					x0, y0 = x, y
+					pos0 = pos
+					# print("First repeated element ", pos0, x0, y0)
+				elif (x == x0) and (y == y0) and (lattice[x][y] == 1):
+					# print("Deleting from ", pos0, " to ", pos)
+					del trajectory[pos0:pos]
+					x0, y0 = None, None
+					pos = pos0
+				lattice[x][y] -= 1
+				pos += 1
+
+			self.trajectories.append(trajectory)
 
 	@property
 	def trajectories(self):
