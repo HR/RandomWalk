@@ -13,7 +13,7 @@ from LERW import LERW
 import subprocess
 
 dpath = "data/qsub/"
-spath = "plots/hist/dbins"
+spath = "plots/hist/dbins/"
 p = subprocess.Popen(['ls', '-v', dpath], stdout=subprocess.PIPE)
 fnames = p.communicate()[0].split('\n')[:-1]
 data = []
