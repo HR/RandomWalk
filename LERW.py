@@ -203,7 +203,7 @@ class LERW:
 				lattice[x][y] += 1
 				trajectory.append((x, y))
 
-			self.trajectories.append(len(trajectory))
+			self.trajectories.append(trajectory)
 
 	@property
 	def trajectories(self):
@@ -221,13 +221,25 @@ class LERW:
 	def trajectories_leftright(self):
 		return self.trajectories_leftright
 
-	def savefig(self, **kwargs):
+	def plot(self, **kwargs):
+		LERW = kwargs.get('LERW', self.trajectories)
+		c = kwargs.get('c', 'g')
+		Length = kwargs.get('Length', self.Length)
+		Circ = kwargs.get('Circ', self.Circ)
+		figname = kwargs.get('figname', 'LERW_output')
+
 		fig, ax = plt.subplots()
 		fig.set_size_inches(3, self.Circ * 3. / self.Length)
 		ax.set_xlim(0, self.Length - 1)
 		ax.set_ylim(0, self.Circ - 1)
 		ax.get_xaxis().set_visible(False)
 		ax.get_yaxis().set_visible(False)
-		for i in range(len(self.trajectories)):
-			plt.plot(*zip(*self.trajectories[i]), linewidth=0.3)
-		plt.savefig(kwargs.get('figname', 'LERW_output'), bbox_inches='tight', dpi=kwargs.get('dpi', 300))
+
+		for pos in range(len(LERW)):
+			x, y = LERW[pos]
+			if (x == Length) or (x == 0) or (y == Circ) or (y == Circ) or (y == 0):
+				LERW[pos] = (np.nan, np.nan)
+			pos += 1
+
+		plt.plot(*zip(*LERW), color=c, linewidth=0.2)
+		plt.savefig(figname, bbox_inches='tight', dpi=kwargs.get('dpi', 300))
