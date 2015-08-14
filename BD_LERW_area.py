@@ -13,20 +13,22 @@ import matplotlib.pyplot as plt
 from LERW import LERW
 
 n = 1
-length = 200
+length = 20
 areas = [] # list of intersections' enclosed area
 
 randomwalk = LERW()
-randomwalk.gen_bidirectional(realizations=n, Length=length, Circ=200)
-LERW_LeftRight = randomwalk.trajectories_leftright
-LERW_RightLeft = randomwalk.trajectories_rightleft
-
+randomwalk.gen_bidirectional(realizations=n, Length=length, Circ=20)
+LERW_LeftRight = randomwalk.trajectories_leftright[0]
+LERW_RightLeft = randomwalk.trajectories_rightleft[0]
 # Calc: enclosed area between the intersections of bidirectional random walks
 
 
-# for i in range(length):
-# 	for x in lerwlr:
-# 		if x[1] == i:
+for i in range(length):
+    lr = [x for j, x in enumerate(LERW_LeftRight) if x[0] == i]
+    rl = [x for j, x in enumerate(LERW_RightLeft) if x[0] == i]
+    
+    if len(lr) > 1 or len(rl) > 1:
+        print("At {}:\n\tleft-right: {}, \n\tright-left: {}".format(i, lr, rl))
 #
 # print areas
 

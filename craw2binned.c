@@ -193,7 +193,7 @@ if (spit_out_minmax==1) {
 	return(0);
 }
 
-//printf("#Info: parameters nbins, min, max: %i %g %g\n", nbins, min, max);
+// printf("#Info: parameters nbins, min, max: %i %g %g\n", nbins, min, max);
 
 if ((min<0) || (max<0)) {
 	fprintf(stderr, "min<0 or max<0, %g %g\n", min, max);
@@ -205,9 +205,9 @@ double b=pow(10,1/((double)nbins));
 smin=pow(b,(int)(log(min)/log(b)))/sqrt(sqrt(b));
 int kmax=(int)(log(max/smin)/log(b))+1;
 
-//printf("#Info: parameters b, smin, kmax: %g %g %i\n", b, smin, kmax);
+// printf("#Info: parameters b, smin, kmax: %g %g %i\n", b, smin, kmax);
 
-#define MALLOC(a,n) {if ((a=malloc(sizeof(*a)*(n)))==NULL) { fprintf(stderr, "Not enough memory for %s, requested %i bytes, %i items of size %i. %i::%s\n", #a, (int)(sizeof(*a)*n), n, (int)sizeof(*a), errno, strerror(errno)); exit(EXIT_FAILURE); }}
+#define MALLOC(a,n) if ((a=malloc(sizeof(*a)*(n)))==NULL) { fprintf(stderr, "Not enough memory for %s, requested %i bytes, %i items of size %i. %i::%s\n", #a, (int)(sizeof(*a)*n), n, (int)sizeof(*a), errno, strerror(errno)); exit(EXIT_FAILURE); }
 
 
 MALLOC(n, kmax);
@@ -295,12 +295,12 @@ if (N==0) N=-1;
 
 if( force_last_bin_correction){
 
-	fprintf(stderr,	"WARNING: option -t caused first and last bin to be\n"
-			"				 corrected (they are smaller). This assumes that\n"
-			"				 the data has been truncated or filtered.\n");
-	fprintf(stdout,	"# WARNING: option -t caused first and last bin to be\n"
-			"#					corrected (they are smaller). This assumes that\n"
-			"#			the data has been truncated or filtered.\n");
+	// fprintf(stderr,	"WARNING: option -t caused first and last bin to be\n"
+	// 		"				 corrected (they are smaller). This assumes that\n"
+	// 		"				 the data has been truncated or filtered.\n");
+	// fprintf(stdout,	"# WARNING: option -t caused first and last bin to be\n"
+	// 		"#					corrected (they are smaller). This assumes that\n"
+	// 		"#			the data has been truncated or filtered.\n");
 
 	for(i=0;i<=kmax;i++) if(n[i]!=0){
 		s[i]=min;

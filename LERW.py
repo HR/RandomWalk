@@ -235,11 +235,15 @@ class LERW:
 		ax.get_xaxis().set_visible(False)
 		ax.get_yaxis().set_visible(False)
 
+		Plots = []
+		prevInd = 0
 		for pos in range(len(LERW)):
 			x, y = LERW[pos]
 			if (x == Length) or (x == 0) or (y == Circ) or (y == Circ) or (y == 0):
-				LERW[pos] = (np.nan, np.nan)
+				Plots.append(LERW[prevInd:pos])
+				prevInd = pos
 			pos += 1
 
-		plt.plot(*zip(*LERW), color=c, linewidth=0.2)
+		for plot in Plots:
+			plt.plot(*zip(*plot), color=c, linewidth=0.2)
 		plt.savefig(figname, bbox_inches='tight', dpi=kwargs.get('dpi', 300))

@@ -34,6 +34,19 @@ ax.set_ylim(0, Circ - 1)
 ax.get_xaxis().set_visible(False)
 ax.get_yaxis().set_visible(False)
 
+def plotit(LERW, c, lw):
+	Plots = []
+	prevInd = 0
+	for pos in range(len(LERW)):
+		x, y = LERW[pos]
+		if (x == Length) or (x == 0) or (y == Circ) or (y == Circ) or (y == 0):
+			Plots.append(LERW[prevInd:pos])
+			prevInd = pos
+		pos += 1
+
+	for plot in Plots:
+		plt.plot(*zip(*plot), color=c, linewidth=lw)
+
 # Generate a randomwalk
 while True:
 	s += 1
@@ -78,7 +91,8 @@ while pos < len(lerw):
 	lcpy[x][y] -= 1
 	pos += 1
 
-plt.plot(*zip(*lerw), color='b', linewidth=0.3)
+# plt.plot(*zip(*lerw), color='b', linewidth=0.3)
+plotit(lerw, 'b', 0.3)
 
 
 # Loop erasure (tranversal from right to left)
@@ -99,7 +113,8 @@ while pos < len(lerw):
 	lcpy[x][y] -= 1
 	pos += 1
 
-plt.plot(*zip(*lerw), color='g', linewidth=0.3)
+# plt.plot(*zip(*lerw), color='g', linewidth=0.3)
+plotit(lerw, 'g', 0.3)
 
 # Plot random walk
 plt.savefig( "plots/"+__file__[:-3]+".png", bbox_inches="tight", dpi=dpi)
